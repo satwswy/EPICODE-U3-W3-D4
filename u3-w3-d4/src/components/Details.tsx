@@ -11,7 +11,7 @@ const Details = () => {
     const params = useParams()
     console.log(params)
     let movieId = params.movieId
-    const [articles, setArticles] = useState<Article|null>(null)
+    const [article, setArticle] = useState<Article|null>(null)
 
     useEffect(() => {
         fetchArticles()
@@ -25,7 +25,7 @@ const Details = () => {
             if (response.ok) {
                 // let's take the books out of the body
                 const articles = await response.json()
-                setArticles(articles)
+                setArticle(articles)
                 console.log(articles)
             } else {
                 console.log('error happened fetching the articles')
@@ -36,15 +36,14 @@ const Details = () => {
     }
 
     return (
-        { Article&&
+        article &&
         <ListGroup>
-  <ListGroup.Item>Title :{articles.title} </ListGroup.Item>
+  <ListGroup.Item>Title :{article.title} </ListGroup.Item>
   <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
   <ListGroup.Item>Morbi leo risus</ListGroup.Item>
   <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
   <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-</ListGroup>
-         } )
+</ListGroup> )
 }
 
 export default Details
